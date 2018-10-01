@@ -6,7 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script>
-location.href='navigation.jsp';
+var JD_CTX = '${pageContext.request.contextPath}';
+location.href= JD_CTX + 'navigation.jsp';
 </script>
 </head>
 </body>

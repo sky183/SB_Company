@@ -57,7 +57,7 @@ function displayLogin(){
 function logout(){
 	__logout(function(){
 		alert("로그아웃 성공!");
-		location.href='login.jsp';		
+		location.href = JD_CTX + 'login.jsp';		
 	});
 }
 </script>
@@ -71,7 +71,7 @@ function logout(){
 			<li><a href = "">메인</a></li>
 			<li><a href = "">메인</a></li>
 			<li><a href = "">메인</a></li>
-			<li id ="login" style="display:none;"><a href="login.jsp">로그인</a></li>
+			<li id ="login" style="display:none;"><a href="<c:url value="login.jsp"/>">로그인</a></li>
 			<li id ="logout" style="display:none;"><a href="javascript:logout()">로그아웃</a></li>
 		</ul>
 	</div>
