@@ -37,6 +37,18 @@
 		margin-right : 50px;
 	}
 </style>
+<jsp:include page="loginScripts.jsp"/>
+<%-- <jsp:include page="loginScripts.jsp"/>	 --%>
+<%-- 	<jsp:param name="checkYn" value="Y" /> 로그인 체크가 필요한경우 추가 --%>
+<%-- </jsp:include> --%>
+<script>
+function logout(){
+	__logout(function(name){
+		alert(name);
+		location.href='login.jsp';		
+	});
+}
+</script>
 </head>
 <body>
 <div id = "wrap">
@@ -47,7 +59,8 @@
 			<li><a href = "">메인</a></li>
 			<li><a href = "">메인</a></li>
 			<li><a href = "">메인</a></li>
-			<li id = "login"><a href = "">로그인</a></li>
+			<li id ="login"><a href="login.jsp">로그인</a></li>
+			<li id ="login"><a href="javascript:logout()">로그아웃</a></li>
 		</ul>
 	</div>
 </div>
