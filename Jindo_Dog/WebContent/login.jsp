@@ -18,13 +18,16 @@
     Kakao.Auth.createLoginButton({
       container: '#kakao-login-btn',
       success: function(authObj) {
-    	Kakao.Auth.setAccessToken(authObj.access_token);
+    	alert("로그인 성공!");
     	location.href='navigation.jsp';
+    	//성공했을때 현재는 네비게이션 페이지로 이동.
       },
       fail: function(err) {
          alert(JSON.stringify(err));
       }
     });
+    
+    //로그인 성공 판단
 	function isLogin(){
 		var result = false;
 		if(Kakao.Auth.getAccessToken()){
@@ -32,9 +35,13 @@
 		}
 		return result;
 	}
+    
+	//로그아웃
 	function logout(){
 		Kakao.Auth.logout();
 	}
+	
+	//이미 로그인이 되어있다면 다시 네비게이션 페이지로 이동
 	if(isLogin()){
 		location.href='navigation.jsp';
 	}

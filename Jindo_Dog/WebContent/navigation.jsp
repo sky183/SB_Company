@@ -32,7 +32,7 @@
 		margin : 10px 20px;
 		text-decoration : none;
 	}
-	#login{
+	#login,#logout{
 		float : right;
 		margin-right : 50px;
 	}
@@ -42,9 +42,21 @@
 <%-- 	<jsp:param name="checkYn" value="Y" /> 로그인 체크가 필요한경우 추가 --%>
 <%-- </jsp:include> --%>
 <script>
+$(function(){
+	displayLogin();
+});
+function displayLogin(){
+	if(__isLogin()){
+		$("#login").hide();
+		$("#logout").show();
+	}else{
+		$("#login").show();
+		$("#logout").hide();
+	}
+}
 function logout(){
-	__logout(function(name){
-		alert(name);
+	__logout(function(){
+		alert("로그아웃 성공!");
 		location.href='login.jsp';		
 	});
 }
@@ -59,8 +71,8 @@ function logout(){
 			<li><a href = "">메인</a></li>
 			<li><a href = "">메인</a></li>
 			<li><a href = "">메인</a></li>
-			<li id ="login"><a href="login.jsp">로그인</a></li>
-			<li id ="login"><a href="javascript:logout()">로그아웃</a></li>
+			<li id ="login" style="display:none;"><a href="login.jsp">로그인</a></li>
+			<li id ="logout" style="display:none;"><a href="javascript:logout()">로그아웃</a></li>
 		</ul>
 	</div>
 </div>
