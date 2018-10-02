@@ -12,7 +12,6 @@
 	var score=0; //점수
 	var spyNum=0; // 간첩수
 	var handler=[]; //각 마커마다 주어지는 이벤트핸들러 배열
-	var board;
             $(document).ready(function() {
             	$('#scoreBoard').html('<h1>로딩중...</h1>');
             	$('body').append('남은 간첩보다 잡은간첩이 많으면 승리!');
@@ -23,25 +22,23 @@
                     success: function(data) {
                     	geocoder = new daum.maps.services.Geocoder();
                        
-                        $(data).find('SebcBicycleRetalKor').find('row').find('ADD_KOR').each(function() {
-                        	//$('body').append($(this)+'<br>');
-                            if ($(this).text() != "") {
+                        $(data).find('SebcBicycleRetalKor').find('row').each(function() {
+                        	var Lati = $(this).find('LATITUDE').text();
+							var Longi = $(this).find('LONGITUDE').text();                       	
+                            if ($(this).find('ADD_KOR').text() != ""){
                                 // 주소-좌표 변환 객체를 생성합니다
-                                
-                                geocoder.addressSearch($(this).text(), function(result, status) {
-                                    // 정상적으로 검색이 완료됐으면 
-                                    if (status === daum.maps.services.Status.OK) {
                                     	cnt++;
-                                        coords = new daum.maps.LatLng(result[0].y, result[0].x); 
-                                        // 결과값으로 받은 위치를 마커로 표시합니다
+                                        var imageSrc = 'images/spyMarker.png', // 마커이미지의 주소입니다    
+                  		   					imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
+                  		    				imageOption = {offset: new daum.maps.Point(20, 40)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                  		    			var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption)
                                         var marker = new daum.maps.Marker({
                                             map: map,
-                                            position: coords,
+                                            position: new daum.maps.LatLng(Lati, Longi),
+                                            image: markerImage,
                                             clickable: true
                                         });
                                         markers.push(marker); //마커배열에 생성한마커 추가
-                                    }
-                                }); //end geocoder()
                             }
                         });//end each
                         
@@ -49,6 +46,10 @@
                     }//end success
                 });//end ajax()
                 function winOrLose(marker){ //승패확인,클릭카운트확인
+                	var board = '<h1>'+'잡은간첩:'+score+'<br>'+
+					'잔여탐색횟수:'+clickCnt+'<br>'+
+					'생존한간첩:'+spyNum+'</h1>'+'<br>'
+					$('#scoreBoard').html(board);
                 	daum.maps.event.removeListener(marker, 'click', handler[marker.getTitle()]);
                 	if(clickCnt<=0){
                 		if(score!=0&&score>=spyNum){ //남은간첩보다 점수가 높으면 승리
@@ -76,9 +77,9 @@
             		}
                 	
                 	ranNum = randomNum(cnt-1);
-                	spyNum=20;
+                	spyNum=120;
                 	clickCnt=spyNum*2;
-                	board = '<h1>'+'잡은간첩:'+score+'<br>'+
+                	var board = '<h1>'+'잡은간첩:'+score+'<br>'+
 					'잔여탐색횟수:'+clickCnt+'<br>'+
 					'생존한간첩:'+spyNum+'</h1>'+'<br>'
 					$('#scoreBoard').html(board);
@@ -92,17 +93,12 @@
                   			if(clickCnt>0){
                   			clickCnt--;
                   			}
-                  			var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-                  		   		imageSize = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
-                  		    	imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                  			var imageSrc = 'images/arrestMarker.png', // 마커이미지의 주소입니다    
+                  		   		imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
+                  		    	imageOption = {offset: new daum.maps.Point(20, 40)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                   		    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption)
                   			this.setImage(markerImage);
 							alert(this.getTitle()+"번 간첩을 잡았습니다!");
-							
-							board = '<h1>'+'잡은간첩:'+score+'<br>'+
-										'잔여탐색횟수:'+clickCnt+'<br>'+
-										'생존한간첩:'+spyNum+'</h1>'+'<br>'
-							$('#scoreBoard').html(board);
                         	winOrLose(this);
                         	
                 		}
@@ -117,16 +113,12 @@
                       			}
                 			alert('이곳에 간첩은 없었습니다..');
                 			this.setMap(null);
-                			var board = '<h1>'+'잡은간첩:'+score+'<br>'+
-							'잔여탐색횟수:'+clickCnt+'<br>'+
-							'생존한간첩:'+spyNum+'</h1>'+'<br>'
-							$('#scoreBoard').html(board);
                 			winOrLose(this);
                 		}
                 		daum.maps.event.addListener(markers[ranNum[j]], 'click', handler[ranNum[j]]);
                 	}
                 	
-                }, 3000); //end timer
+                }, 300); //end timer
             
                 
                 
@@ -180,7 +172,7 @@
                 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                     mapOption = {
                         center: new daum.maps.LatLng(37.55878012, 126.99500883), // 지도의 중심좌표
-                        level: 8 // 지도의 확대 레벨
+                        level: 7 // 지도의 확대 레벨
                     };
 
             </script>
