@@ -29,7 +29,7 @@
 }
 
 #menuUl li {
-	width: 100px;
+	width: 130px;
 	height: 40px;
 	float: left;
 	list-style: none;
@@ -85,7 +85,7 @@
 		<div id="menu">
 			<ul id="menuUl">
 				<li><a href="main.jsp">메인</a></li>
-				<li><a href="#">api1</a></li>
+				<li><a href="dictionary.jsp">우리말사전</a></li>
 				<li><a href="">api2</a></li>
 				<li><a href="">api3</a></li>
 				<li id="login" style="display: none"><a href="<c:url value="login.jsp"/>">로그인</a></li>
