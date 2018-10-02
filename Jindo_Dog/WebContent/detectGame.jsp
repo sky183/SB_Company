@@ -24,7 +24,7 @@
                     	geocoder = new daum.maps.services.Geocoder();
                        
                         $(data).find('SebcBicycleRetalKor').find('row').find('ADD_KOR').each(function() {
-                        	$('body').append($(this)+'<br>');
+                        	//$('body').append($(this)+'<br>');
                             if ($(this).text() != "") {
                                 // 주소-좌표 변환 객체를 생성합니다
                                 
