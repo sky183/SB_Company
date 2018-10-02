@@ -11,20 +11,26 @@
 
    <input type="text" id="search">
    <button type="button" id="submit2">검색</button>
-
+   <div id="val" style="width:500px"></div>
    <script>
-   $('#submit2').on('click', function() {
-      $.ajax({
-         url : 'https://opendict.korean.go.kr/api/search?key=CB17CA4D03226E324BDC90EB7B2D890F&q=' + $('#search').val(),
-         dataType : 'xml',
-         success : function(data) {
-              $(data).find('definition').each(function(){
-               var definition = $(this).text();         
-               $('<p></p>').text(definition).appendTo('body');
-            }); 
-         }
-      });
-   });
+   var sun = function() {
+	      $.ajax({
+		         url : 'https://opendict.korean.go.kr/api/search?key=CB17CA4D03226E324BDC90EB7B2D890F&q=' + $('#search').val(),
+		         success : function(data) {
+		        	  $('div').html('');
+		              $(data).find('definition').each(function(){
+		               var definition = $(this).text();         
+		               $('<p></p>').text(definition).appendTo('#val');
+		            }); 
+		         }
+		      });
+		   };
+		   
+   $('#submit2').on('click', sun);
+   $("#search").keyup(function(e){if(e.keyCode == 13) sun() });   
+
+   
+   
 </script>
 </body>
 </html>
