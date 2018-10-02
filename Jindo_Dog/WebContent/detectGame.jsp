@@ -82,7 +82,7 @@
 								'잔여탐색횟수:'+clickCnt+'<br>'+
 								'생존한간첩:'+spyNum+'</h1>'+'<br>';
 					$('#scoreBoard').html(board);
-                	for(i=0;i<spyNum;i++){//간첩있는곳 마커옵션
+                	for(var i=0;i<spyNum;i++){//간첩있는곳 마커옵션
                 		markers[ranNum[i]].setTitle(ranNum[i]); //마커타이틀에 식별번호 저장
                 		handler[ranNum[i]] = function(event){//이벤트핸들러 생성
                 			score++;
@@ -103,7 +103,7 @@
                   		daum.maps.event.addListener(markers[ranNum[i]], 'click', handler[ranNum[i]]);
                 	}
                 	
-                	for(j=spyNum;j<cnt;j++){//간첩없는곳 마커옵션
+                	for(var j=spyNum;j<cnt;j++){//간첩없는곳 마커옵션
                 		markers[ranNum[j]].setTitle(ranNum[j]); //마커타이틀에 식별번호저장
                 		handler[ranNum[j]] = function(event){//이벤트핸들러 생성
                 			if(clickCnt>0){
