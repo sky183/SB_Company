@@ -3,16 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-1.10.0.js"></script>
 <script>
-	var ranNum = []; //마커랜덤번호
-	var map; 
-	var geocoder;
-	var cnt=0; //마커수
-	var markers=[]; //마커배열
-	var clickCnt=0; //클릭가능횟수
-	var score=0; //점수
-	var spyNum=0; // 간첩수
-	var handler=[]; //각 마커마다 주어지는 이벤트핸들러 배열
             $(document).ready(function() {
+            	var ranNum = []; //마커랜덤번호
+            	var map; 
+            	var cnt=0; //마커수
+            	var markers=[]; //마커배열
+            	var clickCnt=0; //클릭가능횟수
+            	var score=0; //점수
+            	var spyNum=0; // 간첩수
+            	var handler=[]; //각 마커마다 주어지는 이벤트핸들러 배열
+            	
             	$('#scoreBoard').html('<h1>로딩중...</h1>');
             	$('body').append('남은 간첩보다 잡은간첩이 많으면 승리!');
                 map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다   
@@ -42,11 +42,11 @@
                 function winOrLose(marker){ //승패확인,클릭카운트확인
                 	var board = '<h1>'+'잡은간첩:'+score+'<br>'+ 
 					'잔여탐색횟수:'+clickCnt+'<br>'+
-					'생존한간첩:'+spyNum+'</h1>'+'<br>'
+					'생존한간첩:'+spyNum+'</h1>'+'<br>';
 					$('#scoreBoard').html(board); //스코어보드 갱신
                 	daum.maps.event.removeListener(marker, 'click', handler[marker.getTitle()]); //이벤트 핸들러 제거
                 	if(clickCnt<=0){
-                		if(score!=0&&score>=spyNum){ //남은간첩보다 점수가 높으면 승리
+                		if(score!=0&&score>=spyNum){ //남은간첩보다 점수가 높거나 같으면 승리
                 			win();
                 		}else{
                 			lose();
@@ -54,28 +54,33 @@
                 	}
                 }
                 
+                function pageMove(sc,page){
+                    var f=document.paging; //폼 name
+                    f.score.value = sc;
+                    f.action=page;//이동할 페이지
+                    f.method="post";//POST방식
+                    f.submit();
+                }
+                
                 function win(){ //승리시
                 	alert('youWin!');
-                	location.href = "success.jsp"
+                	pageMove(score,"success.jsp");
                 }
                 
                 function lose(){ //패배시
                 	alert('youLose');
-                	location.href = "fail.jsp"
+                	location.href = "fail.jsp";
                 }
                 
+                
+                
                 setTimeout(function() { //로딩대기시간
-                	
-                	function delMarker(i) {
-            	        markers[i].setMap(null);
-            		}
-                	
                 	ranNum = randomNum(cnt-1);
                 	spyNum=20;
                 	clickCnt=spyNum*3;
                 	var board = '<h1>'+'잡은간첩:'+score+'<br>'+
-					'잔여탐색횟수:'+clickCnt+'<br>'+
-					'생존한간첩:'+spyNum+'</h1>'+'<br>'
+								'잔여탐색횟수:'+clickCnt+'<br>'+
+								'생존한간첩:'+spyNum+'</h1>'+'<br>';
 					$('#scoreBoard').html(board);
                 	for(i=0;i<spyNum;i++){//간첩있는곳 마커옵션
                 		markers[ranNum[i]].setTitle(ranNum[i]); //마커타이틀에 식별번호 저장
@@ -160,6 +165,9 @@
         <body>
             <div id="map" style="width:100%;height:850px;"></div>
 			<div id="scoreBoard"></div>
+			<form name="paging">
+				<input type="hidden" name="score"/>
+			</form>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=067a6bf449e7fc2d40b537d4fbbb485d&libraries=services"></script>
             <script>
                 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

@@ -55,7 +55,7 @@
 <jsp:include page="navigation.jsp"></jsp:include>
 <div id = "conWrap">
 	<div id = "context">
-		<div id = "score"><h1>MISSION CELAR <br>점입니다.</h1></div>	
+		<div id = "score"><h1>MISSION CELAR <br>${param.score}점입니다.</h1></div>	
 		<img src = "images/success.jpg" id = "su1">
 		<img src = "images/success2.jpg" id = "su2">
 		<input type = "button" id = "restart" value = "다시하기">
