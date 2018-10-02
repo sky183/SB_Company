@@ -69,7 +69,9 @@
 		$('#goMain').on('click', function(){
 			location.href('main.jsp');
 		});
-		
+		$('#restart').on('click', function(){
+			location.href = 'detectGame.jsp';
+		});
 	});
 </script>
 </html>
