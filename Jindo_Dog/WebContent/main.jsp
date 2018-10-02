@@ -54,7 +54,7 @@
 	<div id = "context">
 		<img src = "images/start.jpg" id = "startImg1">
 		<img src = "images/start2.JPG" id = "startImg2">
-		<input type = "button" id = "start" value = "START">
+		<input type="button" id="start" value ="START">
 		<div id = "conTitle"><h1>간첩신고는 국번없이<br> 111, 113</h1></div>	
 	</div>
 </div>
@@ -63,9 +63,8 @@
 <script>
 	$(document).ready(function(){
 		$('#start').on('click', function(){
-			location.href('detectGame.jsp');
-		});
-		
+			location.href = 'detectGame.jsp';
+		});	
 	});
 </script>
 </html>
