@@ -38,13 +38,14 @@
 }
 
 #menuUl li a {
-	color: white;
-	margin: 10px 20px;
+ 	color: white; 
+	padding: 50px 20px;
 	text-decoration: none;
 }
 
 #menuUl li:hover {
 	background-color: #8e8e8e;
+	cursor: pointer;
 }
 
 #divideLine {
