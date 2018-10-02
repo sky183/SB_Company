@@ -10,8 +10,8 @@
 	var markers=[]; //마커배열
 	var clickCnt=0; //클릭가능횟수
 	var score=0; //점수
-	var spyNum=0; // 간첩마리수
-	var handler=[];
+	var spyNum=0; // 간첩수
+	var handler=[]; //각 마커마다 주어지는 이벤트핸들러 배열
 	var board;
             $(document).ready(function() {
             	$('#scoreBoard').html('<h1>로딩중...</h1>');
@@ -20,11 +20,11 @@
                 map = new daum.maps.Map(mapContainer, mapOption);
                 $.ajax({
                     url: 'http://openapi.seoul.go.kr:8088/6b69797765676b7337385874585779/xml/SebcBicycleRetalKor/1/200',
-
                     success: function(data) {
                     	geocoder = new daum.maps.services.Geocoder();
                        
                         $(data).find('SebcBicycleRetalKor').find('row').find('ADD_KOR').each(function() {
+                        	$('body').append($(this)+'<br>');
                             if ($(this).text() != "") {
                                 // 주소-좌표 변환 객체를 생성합니다
                                 
@@ -41,11 +41,7 @@
                                         });
                                         markers.push(marker); //마커배열에 생성한마커 추가
                                     }
-                                    
                                 }); //end geocoder()
-                                
-                                
-                                   
                             }
                         });//end each
                         
@@ -55,7 +51,7 @@
                 function winOrLose(marker){ //승패확인,클릭카운트확인
                 	daum.maps.event.removeListener(marker, 'click', handler[marker.getTitle()]);
                 	if(clickCnt<=0){
-                		if(score!=0&&score>=spyNum){
+                		if(score!=0&&score>=spyNum){ //남은간첩보다 점수가 높으면 승리
                 			win();
                 		}else{
                 			lose();
@@ -65,12 +61,12 @@
                 
                 function win(){ //승리시
                 	alert('youWin!');
-                	location.href = "success.jsp";//페이지이동
+                	location.href = "success.jsp"
                 }
                 
                 function lose(){ //패배시
                 	alert('youLose');
-                	location.href = "fail.jsp";//페이지이동
+                	location.href = "fail.jsp"
                 }
                 
                 setTimeout(function() { //로딩대기시간
@@ -88,7 +84,7 @@
 					$('#scoreBoard').html(board);
                 	for(i=0;i<spyNum;i++){//간첩있는곳 마커옵션
                 		markers[ranNum[i]].setTitle(ranNum[i]);
-                		handler[ranNum[i]] = function(event){
+                		handler[ranNum[i]] = function(event){//이벤트핸들러
                 			score++;
                   			if(spyNum>0){
                   			spyNum--;
@@ -115,7 +111,7 @@
                 	
                 	for(j=spyNum;j<cnt;j++){//간첩없는곳 마커옵션
                 		markers[ranNum[j]].setTitle(ranNum[j]);
-                		handler[ranNum[j]] = function(event){
+                		handler[ranNum[j]] = function(event){//이벤트핸들러
                 			if(clickCnt>0){
                       			clickCnt--;
                       			}
@@ -172,7 +168,7 @@
             		z-index:99999;
             		top:0px;
             		padding:0px 10px;
-            	}
+            		}
             </style>
         </head>
 
