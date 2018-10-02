@@ -46,6 +46,10 @@
 	#start {
 		left : 400px;
 	}
+	
+	#start:hover {
+		cursor: pointer;
+	}
 </style>
 </head>
 <body>
