@@ -19,6 +19,6 @@
 	
 	if('${param.checkYn}' == 'Y' && !__isLogin()){
 		alert('로그인 정보가 없습니다.');
-		location.href = JD_CTX + 'login.jsp';
+		location.href = JD_CTX + '/login.jsp';
 	}
 </script>

@@ -74,7 +74,7 @@
 	function logout() {
 		__logout(function() {
 			alert("로그아웃 성공!");
-			location.href = JD_CTX + 'login.jsp';
+			location.href = JD_CTX + '/login.jsp';
 		});
 	}
 </script>

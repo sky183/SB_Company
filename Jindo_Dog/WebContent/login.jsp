@@ -20,7 +20,7 @@
       container: '#kakao-login-btn',
       success: function(authObj) {
     	alert("로그인 성공!");
-    	location.href = JD_CTX + 'navigation.jsp';
+    	location.href = JD_CTX + '/navigation.jsp';
     	//성공했을때 현재는 네비게이션 페이지로 이동.
       },
       fail: function(err) {
@@ -44,7 +44,7 @@
 	
 	//이미 로그인이 되어있다면 다시 네비게이션 페이지로 이동
 	if(isLogin()){
-		location.href = JD_CTX + 'navigation.jsp';
+		location.href = JD_CTX + '/navigation.jsp';
 	}
   //]]>
 </script>
