@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script>
 var JD_CTX = '${pageContext.request.contextPath}';
-location.href= JD_CTX + 'navigation.jsp';
+location.href= JD_CTX + '/navigation.jsp';
 </script>
 </head>
 </body>

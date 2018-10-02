@@ -3,14 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-1.10.0.js"></script>
 <script>
-	var marker=[];
 	var coords = [];
 	var ranNum = []
 	var map;
 	var geocoder;
+	var cnt=0;
+	var markers=[];
             $(document).ready(function() {
-                ranNum = randomNum(130);
-                
                 // 지도를 생성합니다    
                 map = new daum.maps.Map(mapContainer, mapOption);
                 $.ajax({
@@ -18,7 +17,7 @@
 
                     success: function(data) {
                     	geocoder = new daum.maps.services.Geocoder();
-                        var cnt = 0;
+                       
                         $(data).find('SebcBicycleRetalKor').find('row').find('ADD_KOR').each(function() {
                             if ($(this).text() != "") {
                                 $('body').append('<h1>' + cnt + '</h1>');
@@ -29,23 +28,21 @@
                                 geocoder.addressSearch($(this).text(), function(result, status) {
                                     // 정상적으로 검색이 완료됐으면 
                                     if (status === daum.maps.services.Status.OK) {
+                                    	cnt++;
                                         coords[cnt] = new daum.maps.LatLng(result[0].y, result[0].x);
                                         // 결과값으로 받은 위치를 마커로 표시합니다
-                                        marker[cnt] = new daum.maps.Marker({
+                                        var marker = new daum.maps.Marker({
                                             map: map,
                                             position: coords[cnt],
                                             clickable: true
                                         });
-                                        
-                                        
-                                    
-                                        
-                                        cnt++;
+                                        markers.push(marker);
                                     }
+                                    
                                 }); //end geocoder()
                                 
                                 
-                                
+                                   
                             }
                         });//end each
                         
@@ -53,24 +50,44 @@
                     }//end success
                 });//end ajax()
                 
-                setTimeout(function() { for(i=0;i<ranNum.length;i++){//로딩대기시간
+                setTimeout(function() { //로딩대기시간
+                	
+                	function delMarker(i) {
+            	        markers[i].setMap(null);
+            		}
+                	
+                	ranNum = randomNum(cnt-1);
+                	
+                	for(i=0;i<130;i++){
                 	console.log(i+','+ranNum[i]+','+'///');
-                  	daum.maps.event.addListener(marker[ranNum[i]], 'click', function() {
-                    var iwContent = '번호:'+ranNum[i];
-					
-                    // 인포윈도우를 생성합니다
-                    var infowindow = new daum.maps.InfoWindow({
-                        position : coords[ranNum[i]], 
-                        content : iwContent 
-                    });
+                		markers[ranNum[i]].setTitle(ranNum[i]);
+                	
+                  		daum.maps.event.addListener(markers[ranNum[i]], 'click', function() {
+                  			var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+                  		   		imageSize = new daum.maps.Size(64, 69), // 마커이미지의 크기입니다
+                  		    	imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                  			//this.setMap(null);
+                  		    var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption)
+                  			this.setImage(markerImage);
+                    		var iwContent = '번호:'+this.getTitle();
+							alert(this.getTitle());
+                    		// 인포윈도우를 생성합니다
+                    		var infowindow = new daum.maps.InfoWindow({
+                        		position : coords[this.getTitle()], 
+                        		content : iwContent
+                    		});
                       
                     	// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-                        infowindow.open(map,marker[ranNum[i]]); 
-                        infowindow.close();
-                    });
-                } }, 3000);
+                        	infowindow.open(map,this); 
+                        	infowindow.close();
+                    	});
+                	}
+                	
+                }, 3000); //end timer
             
-            });
+                
+                
+            }); //end onload
             
             function randomNum(n){
                 var ar = new Array();
@@ -92,7 +109,7 @@
                 }
          
                 return ar;
-        }
+        	}
 
         </script>
         <!DOCTYPE html>
