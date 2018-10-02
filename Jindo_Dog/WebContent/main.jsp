@@ -63,7 +63,7 @@
 <script>
 	$(document).ready(function(){
 		$('#start').on('click', function(){
-			location.href('detextGame.jsp');
+			location.href('detectGame.jsp');
 		});
 		
 	});
