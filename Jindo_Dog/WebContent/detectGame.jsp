@@ -65,12 +65,12 @@
                 
                 function win(){ //승리시
                 	alert('youWin!');
-                	//페이지이동
+                	location.href = "success.jsp";//페이지이동
                 }
                 
                 function lose(){ //패배시
                 	alert('youLose');
-                	//페이지이동
+                	location.href = "fail.jsp";//페이지이동
                 }
                 
                 setTimeout(function() { //로딩대기시간
