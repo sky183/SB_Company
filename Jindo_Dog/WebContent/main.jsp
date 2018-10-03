@@ -68,12 +68,14 @@
 </body>
 <script>
 
-$(document).ready(function(){
+	$(document).ready(function(){
+
 		$('#start').on('click', function(){
 			location.href = 'detectGame.jsp';
 		});	
-});
+	});
 
 </script>
-
 </html>
+
+
