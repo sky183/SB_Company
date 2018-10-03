@@ -54,15 +54,7 @@
 </head>
 <body>
 <jsp:include page="loginScripts.jsp"/>
-<script type="text/javascript">
-	if(__isLogin()){
-		location.href = "main.jsp";
-	} else{
-		alert("로그인을 해주세요");
-		location.href = "login.jsp";
-	}
-	
-</script>
+
 <jsp:include page="navigation.jsp"></jsp:include>
 <div id = "conWrap">
 	<div id = "context">
@@ -75,10 +67,13 @@
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
 <script>
-	$(document).ready(function(){
+
+$(document).ready(function(){
 		$('#start').on('click', function(){
 			location.href = 'detectGame.jsp';
 		});	
-	});
+});
+
 </script>
+
 </html>
