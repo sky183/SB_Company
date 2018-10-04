@@ -4,7 +4,6 @@
 <%request.setCharacterEncoding("UTF-8");%>
 <script src="https://code.jquery.com/jquery-1.10.0.js"></script>
 <script>
-var ab;
             $(document).ready(function() {
             	var ranNum = []; //마커랜덤번호
             	var map; 
@@ -47,8 +46,8 @@ var ab;
                 function refreshBoard(){
                 	var board = '<h1>'+'잡은간첩:'+score+'<br>'+
 					'잔여탐색횟수:'+clickCnt+'<br>'+
-					'생존한간첩:'+spyNum+'<br>'+
-					'레이더:'+radar+
+					'생존한간첩:'+spyNum+'<br><br>'+
+					'&nbsp<img id="radar" alt="경로이상" src="images/radar.png" /> X'+radar+
 					'</h1>'+'<br>';
 					$('#scoreBoard').html(board);
                 }
@@ -85,33 +84,11 @@ var ab;
                 	location.href = "fail.jsp";
                 }
                 
-                function circle(x1,y1,x2,y2,r,marker){
-                	var markerImage = new daum.maps.MarkerImage(
-                		    'images/spyMarkerRed.png',
-                		    new daum.maps.Size(40, 40), new daum.maps.Point(20, 40));
-                	if(Math.pow(x1-x2,2)+Math.pow(y1-y2,2)<=Math.pow(r,2)){
-                		for(var j=0;j<spyArr.length;j++){ //이미 잡힌 스파이마커의 경우 그대로
-        					console.log(spyArr[j].spyCode);
-        					if(marker.getTitle()==spyArr[j].spyCode){
-        						return false;
-        					}
-        				}
-                		for(var i=0;i<spyTotal;i++){ //잡히지 않은 스파이마커의 경우 이미지변경
-                			if(marker.getTitle()==ranNum[i]){
-                				marker.setImage(markerImage);
-                				return true;
-                			}
-                		}
-                		//marker.setVisible(false);
-                	}
-                }
-                
-                
                 setTimeout(function() { //로딩대기시간
                 	ranNum = randomNum(cnt-1);
                 	spyNum=20;
                 	spyTotal=spyNum;
-                	clickCnt=spyNum*3;
+                	clickCnt=spyNum*2;
                 	var spyNames = ["강수진","김승원","김인규","김찬영","김혜연",
                 					"남윤지","문경원","문상혁","박종찬","김솔",
                 					"신동진","엄기훈","류자영","리민아","조정은",
@@ -128,6 +105,11 @@ var ab;
                   			}
                   			if(clickCnt>0){
                   			clickCnt--;
+                  			}
+                  			if(Math.random()<=0.1){
+                  				alert('레이더 획득!!');
+                  				radar++;
+                  				refreshBoard();
                   			}
                   			var imageSrc = 'images/arrestMarker.png', // 마커이미지의 주소입니다    
                   		   		imageSize = new daum.maps.Size(50, 50), // 마커이미지의 크기입니다
@@ -165,6 +147,31 @@ var ab;
                 	
                 }, 300); //end timer
             
+                function circle(x1,y1,x2,y2,r,marker){
+                	var markerImage = new daum.maps.MarkerImage(
+                		    'images/spyMarkerRed.png',
+                		    new daum.maps.Size(40, 40), new daum.maps.Point(20, 40));
+                	if(Math.pow(x1-x2,2)+Math.pow(y1-y2,2)<=Math.pow(r,2)){
+                		for(var j=0;j<spyArr.length;j++){ //이미 잡힌 스파이마커의 경우 그대로
+        					if(marker.getTitle()==spyArr[j].spyCode){
+        						return false;
+        					}
+        				}
+                		for(var i=0;i<spyTotal;i++){ //잡히지 않은 스파이마커의 경우 이미지변경
+                			if(marker.getTitle()==ranNum[i]){
+                				marker.setImage(markerImage);
+                				var time = setTimeout(function(){
+                					markerImage.Tj="images/spyMarker.png"
+                					marker.setImage(markerImage);
+                					window.clearTimeout(time);
+								}, 500);
+                				
+                				return true;
+                			}
+                		}
+                	}
+                }//end circle
+                
                 daum.maps.event.addListener(map, 'rightclick', function(event) {
                 	if(radar>0){
                 		radar--;
@@ -242,6 +249,10 @@ var ab;
             		color:red;
             		font-weight: bold;
             		font-size: 30px;
+            	}
+            	#radar{
+            		width: 40px;
+    				height: auto;
             	}
             </style>
         </head>
