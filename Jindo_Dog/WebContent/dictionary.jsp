@@ -17,13 +17,20 @@
    height: 470px;
    margin: auto auto;
    overflow-y: auto;
-   padding: 30px 900px 0 500px;
+   padding: 30px 20px 0 20px;
    }
    
+   .view {
+   width: 600px;
+   height: 470px;
+   margin: auto auto;
+   overflow: hidden;
+   }
 
 </style>
 <body>
 <jsp:include page="navigation.jsp"></jsp:include>
+<div class="view">
    <div class="main">
    <h1>우리말 사전 검색 서비스</h1>
    <input type="text" id="search">
@@ -32,8 +39,10 @@
    <br>
    <br>
    <div style="font-style: italic; font-size: 25px;">검색 내용</div>
+   <br>
    <div id="val" style="width:500px"></div>
    </div>
+ </div>
    <jsp:include page="footer.jsp"></jsp:include>
    <script>
    var sun = function() {
