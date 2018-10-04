@@ -57,7 +57,7 @@
 <div id = "conWrap">
 	<div id = "context">
 		<div id = "score"><h1>MISSION FAILD <br>이런 간나SHAKE IT</h1></div>	
-		<img src = "images/failLeft.jpg" id = "su1">
+		<img src = "images/failLeft.png" id = "su1">
 		<img src = "images/faliRight.png" id = "su2">
 		<input type = "button" id = "restart" value = "다시하기">
 		<input type = "button" id = "goMain" value = "메인으로">
