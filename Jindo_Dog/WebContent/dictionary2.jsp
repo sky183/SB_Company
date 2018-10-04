@@ -28,6 +28,7 @@
 </style>
 <body>
 <jsp:include page="navigation.jsp"></jsp:include>
+<div class="view">
    <div class="main">
    <h1>남북한말 사전 검색 서비스</h1>
    <input type="text" id="search">
@@ -38,6 +39,7 @@
    <div style="font-style: italic; font-size: 25px;">검색 내용</div>
    <br>
    <div id="val" style="width:500px"></div>
+   </div>
    </div>
    <jsp:include page="footer.jsp"></jsp:include>
    <script>
