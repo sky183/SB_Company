@@ -4,17 +4,20 @@
 <%request.setCharacterEncoding("UTF-8");%>
 <script src="https://code.jquery.com/jquery-1.10.0.js"></script>
 <script>
+var ab;
             $(document).ready(function() {
             	var ranNum = []; //마커랜덤번호
             	var map; 
             	var cnt=0; //마커수
-            	var markers=[]; //마커배열
+            	var markers=[];//마커배열
             	var clickCnt=0; //클릭가능횟수
             	var score=0; //점수
             	var spyNum=0; // 간첩수
             	var handler=[]; //각 마커마다 주어지는 이벤트핸들러 배열
             	var spyArr=[]; //잡힌간첩 배열
             	var timer;
+            	var spyTotal=0;
+            	var radar=1;
             	$('#scoreBoard').html('<h1>로딩중...</h1>');
             	$('#subject').html('<h4>남은 간첩보다 잡은간첩이 많으면 승리!</h4>');
                 map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다   
@@ -25,7 +28,6 @@
                         	var Lati = $(this).find('LATITUDE').text();
 							var Longi = $(this).find('LONGITUDE').text();                       	
                             if ($(this).find('ADD_KOR').text() != ""){
-                                // 주소-좌표 변환 객체를 생성합니다
                             	cnt++;
                             	var imageSrc = 'images/spyMarker.png', // 마커이미지의 주소입니다    
                   		   			imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
@@ -41,11 +43,18 @@
                         });//end each
                     }//end success
                 });//end ajax()
-                function winOrLose(marker){ //승패확인,클릭카운트확인
-                	var board = '<h1>'+'잡은간첩:'+score+'<br>'+ 
+                
+                function refreshBoard(){
+                	var board = '<h1>'+'잡은간첩:'+score+'<br>'+
 					'잔여탐색횟수:'+clickCnt+'<br>'+
-					'생존한간첩:'+spyNum+'</h1>'+'<br>';
-					$('#scoreBoard').html(board); //스코어보드 갱신
+					'생존한간첩:'+spyNum+'<br>'+
+					'레이더:'+radar+
+					'</h1>'+'<br>';
+					$('#scoreBoard').html(board);
+                }
+                
+                function winOrLose(marker){ //승패확인,클릭카운트확인
+                	refreshBoard();
 					//$('body').append(arrestedSpy[this.getTitle()]+'<br>');
                 	daum.maps.event.removeListener(marker, 'click', handler[marker.getTitle()]); //이벤트 핸들러 제거
                 	if(clickCnt<=0){
@@ -76,21 +85,39 @@
                 	location.href = "fail.jsp";
                 }
                 
+                function circle(x1,y1,x2,y2,r,marker){
+                	var markerImage = new daum.maps.MarkerImage(
+                		    'images/spyMarkerRed.png',
+                		    new daum.maps.Size(40, 40), new daum.maps.Point(20, 40));
+                	if(Math.pow(x1-x2,2)+Math.pow(y1-y2,2)<=Math.pow(r,2)){
+                		for(var j=0;j<spyArr.length;j++){ //이미 잡힌 스파이마커의 경우 그대로
+        					console.log(spyArr[j].spyCode);
+        					if(marker.getTitle()==spyArr[j].spyCode){
+        						return false;
+        					}
+        				}
+                		for(var i=0;i<spyTotal;i++){ //잡히지 않은 스파이마커의 경우 이미지변경
+                			if(marker.getTitle()==ranNum[i]){
+                				marker.setImage(markerImage);
+                				return true;
+                			}
+                		}
+                		//marker.setVisible(false);
+                	}
+                }
                 
                 
                 setTimeout(function() { //로딩대기시간
                 	ranNum = randomNum(cnt-1);
                 	spyNum=20;
+                	spyTotal=spyNum;
                 	clickCnt=spyNum*3;
                 	var spyNames = ["강수진","김승원","김인규","김찬영","김혜연",
                 					"남윤지","문경원","문상혁","박종찬","김솔",
                 					"신동진","엄기훈","류자영","리민아","조정은",
                 					"김정기","하지승","한겨례","한수은","함동주"];
                 	var spyNo = randomNum(spyNum-1); //스파이 숫자까지의 수를 셔플하여 배열로 저장
-                	var board = '<h1>'+'잡은간첩:'+score+'<br>'+
-								'잔여탐색횟수:'+clickCnt+'<br>'+
-								'생존한간첩:'+spyNum+'</h1>'+'<br>';
-					$('#scoreBoard').html(board);
+                	refreshBoard();
 					
                 	for(var i=0;i<spyNum;i++){//간첩있는곳 마커옵션
                 		markers[ranNum[i]].setTitle(ranNum[i]); //마커타이틀에 식별번호 저장
@@ -138,7 +165,18 @@
                 	
                 }, 300); //end timer
             
+                daum.maps.event.addListener(map, 'rightclick', function(event) {
+                	if(radar>0){
+                		radar--;
+                		refreshBoard();
+                		for(var n=0;n<cnt;n++){
+        					circle(markers[n].getPosition().ib,markers[n].getPosition().jb,
+        							event.latLng.ib,event.latLng.jb,0.01,markers[n]);
+        				}
+                	}
+                });
                 
+               
                 
             }); //end onload
             
