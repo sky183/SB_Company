@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<script src="https://code.jquery.com/jquery-1.10.0.js"></script>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -66,11 +67,15 @@
 </body>
 <script>
 	$(document).ready(function(){
+		var spyJson = ${param.spyJson} //json객체 그대로 받아옴.
+		// 아래와같은 형태로 사용. spyCode=간첩코드,name=간첩이름,[]=배열번호 아래코드는 마지막 간첩 출력
+		alert(spyJson[spyJson.length-1].spyCode+" : "+spyJson[spyJson.length-1].name); 
 		$('#goMain').on('click', function(){
 			location.href('main.jsp');
 		});
 		$('#restart').on('click', function(){
 			location.href = 'detectGame.jsp';
+		
 		});
 	});
 </script>

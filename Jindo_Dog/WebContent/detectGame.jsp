@@ -102,8 +102,8 @@
                   			clickCnt--;
                   			}
                   			var imageSrc = 'images/arrestMarker.png', // 마커이미지의 주소입니다    
-                  		   		imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
-                  		    	imageOption = {offset: new daum.maps.Point(20, 40)}, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+                  		   		imageSize = new daum.maps.Size(50, 50), // 마커이미지의 크기입니다
+                  		    	imageOption = {offset: new daum.maps.Point(25, 50)}, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                   		    	markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
                   			this.setImage(markerImage); //해당마커의 마커이미지 변경
 							spyArr.push({"name":spyNames[spyNo.shift()],"spyCode":this.getTitle()});
@@ -163,6 +163,14 @@
             <meta charset="utf-8">
             <title>jindo-game</title>
             <style>
+            	#container{
+            		width: 1800px;
+            		margin: 0px auto;
+            	}
+            	#map{
+            		width: 100%;
+            		height: 850px;
+            	}
             	#scoreBoard{
             		position: absolute;
             		display: block;
@@ -170,13 +178,37 @@
             		top:0px;
             		padding:0px 10px;
             		}
+            	#MsgBoard{
+            		position: absolute;
+            		display: inline-block;
+            		z-index:99999;
+            		top:100px;
+            		width:100%;
+            		text-align:center;
+            	}
+            	.successMsg{
+            		color:green;
+            		width:100%;
+            		text-align:center;
+            		font-weight: bold;
+            		font-size: 20px;
+            		
+            	}
+            	.failMsg{
+            		color:red;
+            		font-weight: bold;
+            		font-size: 20px;
+            	}
             </style>
         </head>
 
         <body>
-            <div id="map" style="width:100%;height:850px;"></div>
+        	<div id="container">
+            <div id="map"></div>
 			<div id="scoreBoard"></div>
 			<div id="arrested"><strong>잡은간첩: </strong> </div>
+			<div id="MsgBoard"><p class="successMsg"></p></div>
+			</div>
 			<form name="paging">
 				<input type="hidden" name="score"/>
 				<input type="hidden" name="spyJson">
