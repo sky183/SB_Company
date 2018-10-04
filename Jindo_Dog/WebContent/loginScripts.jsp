@@ -4,8 +4,9 @@
 <script type='text/javascript'>
 	
 	var JD_CTX = '${pageContext.request.contextPath}';
-  //사용할 앱의 JavaScript 키를 설정해 주세요.
-	Kakao.init('e1e4e3679a2a2a6dcab728b3a143332f');
+	
+  	//사용할 앱의 JavaScript 키를 설정해 주세요.
+	Kakao.init('1ea997909a92b901e801433aa9b49158');
 	function __isLogin(){
 		var result = false;
 		if(Kakao.Auth.getAccessToken()){
