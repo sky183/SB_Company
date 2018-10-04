@@ -147,7 +147,7 @@
                 	
                 }, 300); //end timer
             
-                function circle(x1,y1,x2,y2,r,marker){
+                function searchRadar(x1,y1,x2,y2,r,marker){
                 	var markerImage = new daum.maps.MarkerImage(
                 		    'images/spyMarkerRed.png',
                 		    new daum.maps.Size(40, 40), new daum.maps.Point(20, 40));
@@ -169,15 +169,15 @@
                 				return true;
                 			}
                 		}
-                	}
-                }//end circle
+                	}//end if pow
+                }//end radar
                 
                 daum.maps.event.addListener(map, 'rightclick', function(event) {
                 	if(radar>0){
                 		radar--;
                 		refreshBoard();
                 		for(var n=0;n<cnt;n++){
-        					circle(markers[n].getPosition().ib,markers[n].getPosition().jb,
+        					searchRadar(markers[n].getPosition().ib,markers[n].getPosition().jb,
         							event.latLng.ib,event.latLng.jb,0.01,markers[n]);
         				}
                 	}
