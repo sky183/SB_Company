@@ -11,7 +11,7 @@
 		padding : 0px;
 	}
 	#context{
-		margin-left : 100px;
+	/* 	margin-left : 100px; */
 		width : 1000px;
 		height : 500px;
 		position : relative;
@@ -49,6 +49,13 @@
 	
 	#start:hover {
 		cursor: pointer;
+		background-color : #999;
+	}
+	
+	#conWrap {
+		width: 1000px;
+		position: relative;
+		margin: 0 auto;
 	}
 </style>
 </head>

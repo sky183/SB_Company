@@ -8,7 +8,9 @@
 <style>
 	#footWrap{
 		border-top : 2px solid black;
-		margin-top : 10px
+		margin-top : 10px;
+		margin: 0 auto;
+		width: 1200px;
 	}
 	#SB{
 		margin-top : 5px;

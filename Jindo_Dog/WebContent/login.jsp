@@ -10,15 +10,17 @@
 	iframe{
 		position : absolute;
 		z-index : 1;
-		bottom : 50px;
-		left : 70px;
+		bottom : 150px;
+		left : 190px;
 		border : 1px solid black;
 	}
 	#kkoWrap{
 		position : relative;
+		width: 600px;
+		margin: 0 auto;
 	}
 	#kakao{
-	
+		width: 600px;
 	}
 </style>
 </head>

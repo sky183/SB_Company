@@ -13,8 +13,10 @@
 }
 
 #wrap {
+	margin: 0 auto;
 	margin-top: 5px;
 	border-top: 2px solid black;
+	width: 1000px;
 }
 
 #title {
@@ -30,11 +32,11 @@
 
 #menuUl li {
 	width: 130px;
-	height: 40px;
+	height: 35px;
 	float: left;
 	list-style: none;
 	text-align: center;
-	padding-top: 10px;
+ 	padding-top: 15px; 
 }
 
 #menuUl li a {
