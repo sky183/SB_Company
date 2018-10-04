@@ -60,6 +60,8 @@
 </style>
 </head>
 <body>
+<jsp:include page="loginScripts.jsp"/>
+
 <jsp:include page="navigation.jsp"></jsp:include>
 <div id = "conWrap">
 	<div id = "context">
@@ -72,10 +74,15 @@
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
 <script>
+
 	$(document).ready(function(){
+
 		$('#start').on('click', function(){
 			location.href = 'detectGame.jsp';
 		});	
 	});
+
 </script>
 </html>
+
+

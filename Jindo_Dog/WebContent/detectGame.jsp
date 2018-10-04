@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-1.10.0.js"></script>
 <script>
+
             $(document).ready(function() {
             	var ranNum = []; //마커랜덤번호
             	var map; 
@@ -12,7 +13,7 @@
             	var score=0; //점수
             	var spyNum=0; // 간첩수
             	var handler=[]; //각 마커마다 주어지는 이벤트핸들러 배열
-            	
+            	var spyArr=[]; //잡힌간첩 배열
             	$('#scoreBoard').html('<h1>로딩중...</h1>');
             	$('body').append('남은 간첩보다 잡은간첩이 많으면 승리!');
                 map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다   
@@ -44,6 +45,7 @@
 					'잔여탐색횟수:'+clickCnt+'<br>'+
 					'생존한간첩:'+spyNum+'</h1>'+'<br>';
 					$('#scoreBoard').html(board); //스코어보드 갱신
+					//$('body').append(arrestedSpy[this.getTitle()]+'<br>');
                 	daum.maps.event.removeListener(marker, 'click', handler[marker.getTitle()]); //이벤트 핸들러 제거
                 	if(clickCnt<=0){
                 		if(score!=0&&score>=spyNum){ //남은간첩보다 점수가 높거나 같으면 승리
@@ -57,6 +59,7 @@
                 function pageMove(sc,page){
                     var f=document.paging; //폼 name
                     f.score.value = sc;
+                    f.spyJson.value=JSON.stringify(spyArr); //spyArr배열을 json으로 변경하여 저장
                     f.action=page;//이동할 페이지
                     f.method="post";//POST방식
                     f.submit();
@@ -78,10 +81,16 @@
                 	ranNum = randomNum(cnt-1);
                 	spyNum=20;
                 	clickCnt=spyNum*3;
+                	var spyNames = ["강수진","김승원","김인규","김찬영","김혜연",
+                					"남윤지","문경원","문상혁","박종찬","김솔",
+                					"신동진","엄기훈","류자영","리민아","조정은",
+                					"김정기","하지승","한겨례","한수은","함동주"];
+                	var spyNo = randomNum(spyNum-1); //스파이 숫자까지의 수를 셔플하여 배열로 저장
                 	var board = '<h1>'+'잡은간첩:'+score+'<br>'+
 								'잔여탐색횟수:'+clickCnt+'<br>'+
 								'생존한간첩:'+spyNum+'</h1>'+'<br>';
 					$('#scoreBoard').html(board);
+					
                 	for(var i=0;i<spyNum;i++){//간첩있는곳 마커옵션
                 		markers[ranNum[i]].setTitle(ranNum[i]); //마커타이틀에 식별번호 저장
                 		handler[ranNum[i]] = function(event){//이벤트핸들러 생성
@@ -97,7 +106,9 @@
                   		    	imageOption = {offset: new daum.maps.Point(20, 40)}, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                   		    	markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
                   			this.setImage(markerImage); //해당마커의 마커이미지 변경
-							alert(this.getTitle()+"번 간첩을 잡았습니다!");
+							spyArr.push({"name":spyNames[spyNo.shift()],"spyCode":this.getTitle()});
+							alert(spyArr[spyArr.length-1].name); //마지막 json객체의 name값 alert
+							$('#arrested').append(spyArr[spyArr.length-1].name+' '); //웹에도추가
                         	winOrLose(this);
                 		}
                   		daum.maps.event.addListener(markers[ranNum[i]], 'click', handler[ranNum[i]]);
@@ -165,8 +176,10 @@
         <body>
             <div id="map" style="width:100%;height:850px;"></div>
 			<div id="scoreBoard"></div>
+			<div id="arrested"><strong>잡은간첩: </strong> </div>
 			<form name="paging">
 				<input type="hidden" name="score"/>
+				<input type="hidden" name="spyJson">
 			</form>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=067a6bf449e7fc2d40b537d4fbbb485d&libraries=services"></script>
             <script>
