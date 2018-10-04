@@ -13,10 +13,11 @@
   }
   
   .main {
-   width: 500px;
-   height: 500px;
+   width: 600px;
+   height: 470px;
    margin: auto auto;
    overflow-y: auto;
+   padding: 30px 900px 0 500px;
    }
    
 
