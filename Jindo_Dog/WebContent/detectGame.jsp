@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%request.setCharacterEncoding("UTF-8");%>
 <script src="https://code.jquery.com/jquery-1.10.0.js"></script>
 <script>
-
             $(document).ready(function() {
             	var ranNum = []; //마커랜덤번호
             	var map; 
@@ -167,7 +167,6 @@
         </script>
         <!DOCTYPE html>
         <html>
-
         <head>
             <meta charset="utf-8">
             <title>jindo-game</title>
@@ -221,6 +220,7 @@
 				<input type="hidden" name="score"/>
 				<input type="hidden" name="spyJson">
 			</form>
+			
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=067a6bf449e7fc2d40b537d4fbbb485d&libraries=services"></script>
             <script>
                 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
