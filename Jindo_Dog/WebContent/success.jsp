@@ -7,49 +7,61 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-	* {
-		margin : 0px;
-		padding : 0px;
-	}
-	#context{
-		margin-left : 100px;
-		width : 1000px;
-		height : 500px;
-		position : relative;
-		text-align : center;
-	}
-	img {
-		width : 500px;
-		height : 500px;
-		opacity : 0.5!important;
-		float : left;
-	}
-	#score {
-		position : absolute;
-		z-index : 1;
-		left : 250px;
-		font-size : 30px;
-		top : 50px;
-	}
-	#su2{
-		left : 500px;
-	}
-	input[type="button"]{
-		position : absolute;
-		width : 150px;
-		height : 80px;
-		background-color : black;
-		color : white;
-		border : none;
-		font-size : 25px;
-		top : 300px;
-	}
-	#restart {
-		left : 300px;
-	}
-	#goMain {
-		left : 550px;
-	}
+   * {
+      margin : 0px;
+      padding : 0px;
+   }
+   #context{
+/*       margin-left : 100px; */
+      width : 1000px;
+      height : 500px;
+      position : relative;
+      text-align : center;
+   }
+   img {
+      width : 500px;
+      height : 500px;
+      opacity : 0.5!important;
+      float : left;
+   }
+   #score {
+      position : absolute;
+      z-index : 1;
+      left : 250px;
+      font-size : 30px;
+      top : 50px;
+   }
+   #su2{
+      left : 500px;
+   }
+   input[type="button"]{
+      position : absolute;
+      width : 150px;
+      height : 80px;
+      background-color : black;
+      color : white;
+      border : none;
+      font-size : 25px;
+      top : 300px;
+   }
+   
+   input[type="button"]:hover{
+   cursor:pointer;
+   background-color : #999;
+   }
+   
+   #restart {
+      left : 300px;
+   }
+   #goMain {
+      left : 550px;
+   }
+   
+      #conWrap {
+      width: 1000px;
+      position: relative;
+      margin: 0 auto;
+   }
 </style>
 </head>
 <body>
