@@ -87,9 +87,9 @@
 		<h1 id="title">진돗개 project</h1>
 		<div id="menu">
 			<ul id="menuUl">
-				<li><a href="main.jsp">메인</a></li>
+				<li><a href="index.jsp">메인</a></li>
 				<li><a href="dictionary.jsp">우리말사전</a></li>
-				<li><a href="">api2</a></li>
+				<li><a href="dictionary2.jsp">남북한사전</a></li>
 				<li><a href="">api3</a></li>
 				<li id="login" style="display: none"><a href="<c:url value="login.jsp"/>">로그인</a></li>
 				<li id="logout" style="display: none"><a href="javascript:logout()">로그아웃</a></li>

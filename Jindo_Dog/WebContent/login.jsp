@@ -20,6 +20,10 @@
 		border : 1px solid black;
 	}
 	
+	#login:hover{
+	 opacity: 0.5;
+	}
+	
 	#kkoWrap{
 		position : relative;
 		width: 600px;
@@ -57,7 +61,7 @@
 		Kakao.Auth.login({
 			success : function(data) {
 				alert("로그인 성공!");
-		    	location.href = JD_CTX + '/main.jsp';
+		    	location.href = JD_CTX + '/index.jsp';
 			},
 			fail : function(err) {
 				alert(JSON.stringify(err));

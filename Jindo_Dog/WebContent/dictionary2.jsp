@@ -11,20 +11,17 @@
   body {
    position: relative;
   }
-  
   .main {
    width: 500px;
    height: 500px;
    margin: auto auto;
    overflow-y: auto;
    }
-   
-
 </style>
 <body>
 <jsp:include page="navigation.jsp"></jsp:include>
    <div class="main">
-   <h1>우리말 사전 검색 서비스</h1>
+   <h1>남북한말 사전 검색 서비스</h1>
    <input type="text" id="search">
    <button type="button" id="submit2">검색</button>
    <br>
@@ -37,12 +34,12 @@
    <script>
    var sun = function() {
 	      $.ajax({
-		         url : 'https://opendict.korean.go.kr/api/search?key=CB17CA4D03226E324BDC90EB7B2D890F&q=' + $('#search').val(),
+		         url : 'http://openapi.korean.go.kr/openapi/service/SouthNorthWordsService/getSouthNorthWordsList?serviceKey=qQ6k20Ak4EJ6g7xsJ0nPyKG0DA0dRQ9MHup%2FeF4laDTBFSAyMg3KE%2Ba9onHXtUseTc%2B3Jh9NhX1Po7ArzIBt2Q%3D%3D&title=' + $('#search').val(),
 		         success : function(data) {
 		        	  $('#val').html('');
-		              $(data).find('definition').each(function(index){
-		               var definition = (index + 1) + ' - ' + $(this).text();
-		               $('<p></p>').text(definition).appendTo('#val');
+		              $(data).find('dsemantic').each(function(index){
+		               var dsemantic = (index + 1) + ' - ' + $(this).text();
+		               $('<p></p>').text(dsemantic).appendTo('#val');
 		            }); 
 		         }
 		      });
