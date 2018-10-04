@@ -80,7 +80,7 @@
 
 	//이미 로그인이 되어있다면 다시 네비게이션 페이지로 이동
 	if(isLogin()){
-		location.href = JD_CTX + '/main.jsp';
+		location.href = JD_CTX + '/index.jsp';
 	}
 </script>
 
