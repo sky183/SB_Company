@@ -14,7 +14,7 @@
   
   .main {
    width: 600px;
-   height: 470px;
+   height: 440px;
    margin: auto auto;
    overflow-y: auto;
    padding: 30px 20px 0 20px;
@@ -22,9 +22,10 @@
    
    .view {
    width: 600px;
-   height: 470px;
+   height: 480px;
    margin: auto auto;
    overflow: hidden;
+   padding-bottom: 20px;
    }
 
 </style>
@@ -35,7 +36,6 @@
    <h1>우리말 사전 검색 서비스</h1>
    <input type="text" id="search">
    <button type="button" id="submit2">검색</button>
-   <br>
    <br>
    <br>
    <div style="font-style: italic; font-size: 25px;">검색 내용</div>
