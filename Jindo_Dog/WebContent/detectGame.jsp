@@ -14,8 +14,9 @@
             	var spyNum=0; // 간첩수
             	var handler=[]; //각 마커마다 주어지는 이벤트핸들러 배열
             	var spyArr=[]; //잡힌간첩 배열
+            	var timer;
             	$('#scoreBoard').html('<h1>로딩중...</h1>');
-            	$('body').append('남은 간첩보다 잡은간첩이 많으면 승리!');
+            	$('#subject').html('<h4>남은 간첩보다 잡은간첩이 많으면 승리!</h4>');
                 map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다   
                 $.ajax({
                     url: 'http://openapi.seoul.go.kr:8088/6b69797765676b7337385874585779/xml/SebcBicycleRetalKor/1/200', //서울시 자전거보관소 api
@@ -107,7 +108,11 @@
                   		    	markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
                   			this.setImage(markerImage); //해당마커의 마커이미지 변경
 							spyArr.push({"name":spyNames[spyNo.shift()],"spyCode":this.getTitle()});
-							alert(spyArr[spyArr.length-1].name); //마지막 json객체의 name값 alert
+							window.clearTimeout(timer);
+                			$('#MsgBoard').html('<p class="successMsg">'+spyArr[spyArr.length-1].name+' 간첩을 잡았습니다!</p>'); //마지막 json객체의 name값 alert
+                			timer = setTimeout(function() {
+                				$('#MsgBoard').html('');
+							}, 2000);
 							$('#arrested').append(spyArr[spyArr.length-1].name+' '); //웹에도추가
                         	winOrLose(this);
                 		}
@@ -120,7 +125,11 @@
                 			if(clickCnt>0){
                       			clickCnt--;
                       			}
-                			alert('이곳에 간첩은 없었습니다..');
+                			window.clearTimeout(timer);
+                			$('#MsgBoard').html('<p class="failMsg">이곳에 간첩은 없었습니다..</p>');
+                			timer = setTimeout(function() {
+                				$('#MsgBoard').html('');
+							}, 2000);
                 			this.setMap(null);
                 			winOrLose(this);
                 		}
@@ -182,22 +191,20 @@
             		position: absolute;
             		display: inline-block;
             		z-index:99999;
-            		top:100px;
+            		top:120px;
             		width:100%;
             		text-align:center;
             	}
             	.successMsg{
             		color:green;
-            		width:100%;
-            		text-align:center;
             		font-weight: bold;
-            		font-size: 20px;
+            		font-size: 30px;
             		
             	}
             	.failMsg{
             		color:red;
             		font-weight: bold;
-            		font-size: 20px;
+            		font-size: 30px;
             	}
             </style>
         </head>
@@ -207,6 +214,7 @@
             <div id="map"></div>
 			<div id="scoreBoard"></div>
 			<div id="arrested"><strong>잡은간첩: </strong> </div>
+			<div id="subject"></div>
 			<div id="MsgBoard"><p class="successMsg"></p></div>
 			</div>
 			<form name="paging">
