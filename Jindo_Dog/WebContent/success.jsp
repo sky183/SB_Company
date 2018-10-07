@@ -99,15 +99,22 @@ input[type="button"]:hover {
 					src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" />
 				</a>
 			</div>
+			
+			<form name="paging">
+				<input type="hidden" name="spyJson">
+			</form>
 
 		</div>
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 <script>
+	var spyJson = ${param.spyJson} //json객체 배열 그대로 받아옴.
+	var spyList = []; // 스파이 이름을 저장할 배열
+	
 	$(document).ready(function(){
-		var spyJson = ${param.spyJson} //json객체 그대로 받아옴.
 		
+		console.log(spyJson);
 		// 아래와같은 형태로 사용. spyCode=간첩코드,name=간첩이름,[]=배열번호 아래코드는 마지막 간첩 출력
 		// alert(spyJson[spyJson.length-1].spyCode+" : "+spyJson[spyJson.length-1].name); 
 		
@@ -116,19 +123,26 @@ input[type="button"]:hover {
 		}
 		
 		$('#goMain').on('click', function(){
-			location.href('main.jsp');
+			location.href('index.jsp');
 		});
 		$('#restart').on('click', function(){
 			location.href = 'detectGame.jsp';
-		
 		});
 	});
 	
+	function searchSpy(){
+		jsonSubmit();
+	}
+	
+	function jsonSubmit(){
+        var f=document.paging; //폼 name
+        f.spyJson.value = spyJson;//spyArr배열을 json으로 변경하여 저장
+        f.action = 'searchSpy.jsp';//이동할 페이지
+        f.method = 'post';//POST방식
+        f.submit();
+    }
 	
 	//// 리스트 전송 코드
-	
-	var spyList = []; // 스파이 이름을 저장할 배열
-	
 	// 사용할 앱의 JavaScript 키를 설정해 주세요.
 	Kakao.init('1ea997909a92b901e801433aa9b49158');
 	

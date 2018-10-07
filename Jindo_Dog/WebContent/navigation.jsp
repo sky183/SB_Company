@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,11 +36,15 @@
 	float: left;
 	list-style: none;
 	text-align: center;
- 	padding-top: 15px; 
+	padding-top: 15px;
+}
+
+#menuUl li:nth-child(4) {
+	width: 150px;
 }
 
 #menuUl li a {
- 	color: white; 
+	color: white;
 	padding: 50px 20px;
 	text-decoration: none;
 }
@@ -60,7 +64,7 @@
 	margin-right: 50px;
 }
 </style>
-<jsp:include page="loginScripts.jsp"/>
+<jsp:include page="loginScripts.jsp" />
 <script>
 	$(function() {
 		displayLogin();
@@ -90,13 +94,23 @@
 				<li><a href="index.jsp">메인</a></li>
 				<li><a href="dictionary.jsp">우리말사전</a></li>
 				<li><a href="dictionary2.jsp">남북한사전</a></li>
-				<li><a href="">api3</a></li>
-				<li id="login" style="display: none"><a href="<c:url value="login.jsp"/>">로그인</a></li>
-				<li id="logout" style="display: none"><a href="javascript:logout()">로그아웃</a></li>
+				<li><a id="searchSpy" onclick="searchSpy()">간첩 위치 조회</a></li>
+				<li id="login" style="display: none"><a
+					href="<c:url value="login.jsp"/>">로그인</a></li>
+				<li id="logout" style="display: none"><a
+					href="javascript:logout()">로그아웃</a></li>
 			</ul>
 		</div>
 		<div id="divideLine"></div>
 	</div>
+	
+	<script src="https://code.jquery.com/jquery-1.10.0.js"></script>
+	<script>
+		$('#searchSpy').on('click', function(e){
+			e.preventDefault();
+		});
+	
+	</script>
 </body>
 
 </html>

@@ -60,7 +60,7 @@
                 		if(score!=0&&score>=spyNum){ //남은간첩보다 점수가 높거나 같으면 승리
                 			win();
                 		}else{
-                			lose();
+                			win();
                 		}
                 	}
                 }
@@ -88,7 +88,7 @@
                 	ranNum = randomNum(cnt-1);
                 	spyNum=20;
                 	spyTotal=spyNum;
-                	clickCnt=spyNum*2;
+                	clickCnt=spyNum*1;
                 	var spyNames = ["강수진","김승원","김인규","김찬영","김혜연",
                 					"남윤지","문경원","문상혁","박종찬","김솔",
                 					"신동진","엄기훈","류자영","리민아","조정은",
@@ -117,7 +117,10 @@
                   		    	markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
                   			this.setImage(markerImage); //해당마커의 마커이미지 변경
                   			console.log("X="+this.getPosition().ib+" Y="+this.getPosition().jb); //민수를위한 위도경도표시.
-							spyArr.push({"name":spyNames[spyNo.shift()],"spyCode":this.getTitle()});
+                  			
+							spyArr.push({"name":spyNames[spyNo.shift()],
+										 "spyCode":this.getTitle(), 
+										 "location":[this.getPosition().ib, this.getPosition().jb]});
 							window.clearTimeout(timer);
                 			$('#MsgBoard').html('<p class="successMsg">'+spyArr[spyArr.length-1].name+' 간첩을 잡았습니다!</p>'); //마지막 json객체의 name값 alert
                 			timer = setTimeout(function() {
