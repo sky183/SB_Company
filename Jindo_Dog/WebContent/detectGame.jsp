@@ -116,6 +116,7 @@
                   		    	imageOption = {offset: new daum.maps.Point(25, 50)}, // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
                   		    	markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
                   			this.setImage(markerImage); //해당마커의 마커이미지 변경
+                  			console.log("X="+this.getPosition().ib+" Y="+this.getPosition().jb); //민수를위한 위도경도표시.
 							spyArr.push({"name":spyNames[spyNo.shift()],"spyCode":this.getTitle()});
 							window.clearTimeout(timer);
                 			$('#MsgBoard').html('<p class="successMsg">'+spyArr[spyArr.length-1].name+' 간첩을 잡았습니다!</p>'); //마지막 json객체의 name값 alert
