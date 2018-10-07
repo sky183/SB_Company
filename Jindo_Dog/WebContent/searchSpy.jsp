@@ -50,9 +50,10 @@
 
 	<script src="https://code.jquery.com/jquery-1.10.0.js"></script>
 	<script>
+	var aa = ${param.spyJson};
 		$(document).ready(function(){
 			var spyJson = ${param.spyJson}; //json객체 배열 그대로 받아옴.
-			console.log("받은 데이타:" + JSON.parse(spyJson));
+			console.log("받은 데이타:" + spyJson[0].location);
 		});
 		
 		// 엔터 키 조회 처리 

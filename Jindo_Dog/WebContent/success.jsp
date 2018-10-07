@@ -136,7 +136,7 @@ input[type="button"]:hover {
 	
 	function jsonSubmit(){
         var f=document.paging; //폼 name
-        f.spyJson.value = spyJson;//spyArr배열을 json으로 변경하여 저장
+        f.spyJson.value = JSON.stringify(spyJson);//spyArr배열을 json으로 변경하여 저장
         f.action = 'searchSpy.jsp';//이동할 페이지
         f.method = 'post';//POST방식
         f.submit();
