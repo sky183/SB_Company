@@ -31,7 +31,7 @@
 }
 
 #menuUl li {
-	width: 130px;
+	width: 150px;
 	height: 35px;
 	float: left;
 	list-style: none;
@@ -40,7 +40,7 @@
 }
 
 #menuUl li:nth-child(4) {
-	width: 150px;
+	width: 170px;
 }
 
 #menuUl li a {
