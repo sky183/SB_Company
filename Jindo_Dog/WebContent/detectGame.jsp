@@ -66,7 +66,7 @@
             	var spyArr=[]; //잡힌간첩 배열
             	var timer;
             	var spyTotal=0;
-            	var radar=1;
+            	var radar=3;
             	$('#scoreBoard').html('<h1>로딩중...</h1>');
             	$('#subject').html('<h4>남은 간첩보다 잡은간첩이 많으면 승리!</h4>');
                 map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다   
@@ -138,7 +138,7 @@
                 	ranNum = randomNum(cnt-1);
                 	spyNum=20;
                 	spyTotal=spyNum;
-                	clickCnt=spyNum*1;
+                	clickCnt=spyNum*2;
                 	var spyNames = ["강수진","김승원","김인규","김찬영","김혜연",
                 					"남윤지","문경원","문상혁","박종찬","김솔",
                 					"신동진","엄기훈","류자영","리민아","조정은",
