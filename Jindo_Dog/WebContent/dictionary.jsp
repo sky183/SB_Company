@@ -47,7 +47,7 @@
    <script>
    var sun = function() {
 	      $.ajax({
-		         url : 'https://opendict.korean.go.kr/api/search?key=CB17CA4D03226E324BDC90EB7B2D890F&q=' + $('#search').val(),
+		         url : 'https://opendict.korean.go.kr/api/search?key=41ACF2BBB5EF337606B82EE2912A55EF&q=' + $('#search').val(),
 		         success : function(data) {
 		        	  $('#val').html('');
 		              $(data).find('definition').each(function(index){
