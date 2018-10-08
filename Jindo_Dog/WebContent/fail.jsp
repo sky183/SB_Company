@@ -78,7 +78,7 @@
 <script>
 	$(document).ready(function(){
 		$('#goMain').on('click', function(){
-			location.href = 'main.jsp';
+			location.href = 'index.jsp';
 		});
 		$('#restart').on('click', function(){
 			location.href = 'detectGame.jsp';
