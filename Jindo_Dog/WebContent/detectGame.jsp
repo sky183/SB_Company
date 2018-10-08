@@ -156,7 +156,7 @@
                   			if(clickCnt>0){
                   			clickCnt--;
                   			}
-                  			if(Math.random()<=0.1){
+                  			if(Math.random()<=0.4){
                   				alert('레이더 획득!!');
                   				radar++;
                   				refreshBoard();
