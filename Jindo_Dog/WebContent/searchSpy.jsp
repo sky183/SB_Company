@@ -73,7 +73,7 @@
 		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 		var options = { //지도를 생성할 때 필요한 기본 옵션
 			center : new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-			level : 3 //지도의 레벨(확대, 축소 정도)
+			level : 5 //지도의 레벨(확대, 축소 정도)
 		};
 	
 		var map = new daum.maps.Map(container, options); // 지도 표시.
@@ -116,10 +116,31 @@
 	
 						options = { //지도를 생성할 때 필요한 기본 옵션 변경
 							center : new daum.maps.LatLng(xPoint, yPoint), //지도의 중심좌표 변경
-							level : 3 //지도의 레벨(확대, 축소 정도)
+							level : 6 //지도의 레벨(확대, 축소 정도)
 						};
-	
-						var map = new daum.maps.Map(container, options); // 지도 표시.
+						
+						$.ajax({
+		                    url: 'http://openapi.seoul.go.kr:8088/6b69797765676b7337385874585779/xml/SebcBicycleRetalKor/1/200', //서울시 자전거보관소 api
+		                    success: function(data) {
+		                        $(data).find('SebcBicycleRetalKor').find('row').each(function() {
+		                        	var Lati = $(this).find('LATITUDE').text();
+									var Longi = $(this).find('LONGITUDE').text();                       	
+		                            if ($(this).find('ADD_KOR').text() != ""){
+		                            	var imageSrc = 'images/spyMarker.png', // 마커이미지의 주소입니다    
+		                  		   			imageSize = new daum.maps.Size(40, 40), // 마커이미지의 크기입니다
+		                  		    		imageOption = {offset: new daum.maps.Point(20, 40)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+		                            	var marker = new daum.maps.Marker({
+		                            		map: map,
+		                            		position: new daum.maps.LatLng(Lati, Longi),
+		                            		image: new daum.maps.MarkerImage(imageSrc, imageSize, imageOption),
+		                            		clickable: true
+		                            	});
+		                            }//and if
+		                        });//end each
+		                    }//end success
+		                });//end ajax()
+						
+						map = new daum.maps.Map(container, options); // 지도 표시.
 	
 						// 마커가 표시될 위치입니다 
 						var markerPosition = new daum.maps.LatLng(xPoint, yPoint);
