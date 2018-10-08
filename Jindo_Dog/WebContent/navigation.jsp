@@ -94,7 +94,7 @@
 				<li><a href="index.jsp">메인</a></li>
 				<li><a href="dictionary.jsp">우리말사전</a></li>
 				<li><a href="dictionary2.jsp">남북한사전</a></li>
-				<li><a id="searchSpy" onclick="searchSpy()">간첩 위치 조회</a></li>
+				<li><a href="searchSpy.jsp">간첩 위치 조회</a></li>
 				<li id="login" style="display: none"><a
 					href="<c:url value="login.jsp"/>">로그인</a></li>
 				<li id="logout" style="display: none"><a
@@ -104,13 +104,5 @@
 		<div id="divideLine"></div>
 	</div>
 	
-	<script src="https://code.jquery.com/jquery-1.10.0.js"></script>
-	<script>
-		$('#searchSpy').on('click', function(e){
-			e.preventDefault();
-		});
-	
-	</script>
 </body>
-
 </html>

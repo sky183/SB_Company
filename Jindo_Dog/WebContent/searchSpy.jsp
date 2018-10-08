@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -11,51 +12,57 @@
 <title>Insert title here</title>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1ea997909a92b901e801433aa9b49158&libraries=services,clusterer,drawing"></script>
-<style>
-	* {
-		margin: 0px;
-		padding: 0px;
-	}
-	
-	#searchWrap {
-		margin: 0px auto;
-		width: 500px;
-		height: 480px;
-	}
-	
-	#searchWrap > h1 {
-		margin-top: 20px;
-		margin-bottom: 10px;
-	}
-	
-	#map {
-		margin-top: 10px;
-	}
+<script type="text/javascript"
+	src="https://sgisapi.kostat.go.kr/OpenAPI3/auth/javascriptAuth?consumer_key=e8a7478b5d31421ea3af"></script>
 
+<style>
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+#searchWrap {
+	margin: 0px auto;
+	width: 500px;
+	height: 480px;
+}
+
+#searchWrap>h1 {
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+
+#map {
+	margin-top: 10px;
+	z-index: -1;
+}
+
+#stNameTx {
+	position: absolute;
+	background-color: white;
+	top: 270px;
+	margin-left: 10px;
+	z-index: 1;
+}
 </style>
 
 </head>
 <body>
 	<jsp:include page="navigation.jsp"></jsp:include>
 	<div id="searchWrap">
-		<h1>간첩 위치와 가까운 지하철역 찾기</h1>
+		<h1>지하철역 근처 간첩 찾기</h1>
 
-		<label for="code">간첩 이름</label> <input type="text" id="name" /> 
-		<input type="button" value="조회" id="search" />
-		<h2 id="stNameTx"></h2>
+		<label for="code">역 이름</label> <input type="text" id="name" /> <input
+			type="button" value="조회" id="search" />
+		<h3 id="stNameTx"></h3>
 		<div id="map" style="width: 450px; height: 380px;"></div>
-		
+
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
 
 	<script src="https://code.jquery.com/jquery-1.10.0.js"></script>
+
 	<script>
-	var aa = ${param.spyJson};
-		$(document).ready(function(){
-			var spyJson = ${param.spyJson}; //json객체 배열 그대로 받아옴.
-			console.log("받은 데이타:" + spyJson[0].location);
-		});
-		
 		// 엔터 키 조회 처리 
 		$('#name').keydown(function(e) {
 			if (e.keyCode == 13) {
@@ -127,6 +134,7 @@
 	
 					});
 				},
+	
 				error : $('#stNameTx').html('입력하신 지하철역은 존재하지 않습니다.')
 			}); // end ajax 
 		}

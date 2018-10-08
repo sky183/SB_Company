@@ -123,7 +123,7 @@ input[type="button"]:hover {
 		}
 		
 		$('#goMain').on('click', function(){
-			location.href('index.jsp');
+			location.href = 'index.jsp';
 		});
 		$('#restart').on('click', function(){
 			location.href = 'detectGame.jsp';
