@@ -116,7 +116,7 @@
 	
 						options = { //지도를 생성할 때 필요한 기본 옵션 변경
 							center : new daum.maps.LatLng(xPoint, yPoint), //지도의 중심좌표 변경
-							level : 6 //지도의 레벨(확대, 축소 정도)
+							level : 4 //지도의 레벨(확대, 축소 정도)
 						};
 						
 						$.ajax({
