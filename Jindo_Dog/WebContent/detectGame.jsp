@@ -2,6 +2,56 @@
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%request.setCharacterEncoding("UTF-8");%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jindo-game</title>
+<style>
+#container {
+	width: 1800px;
+	margin: 0px auto;
+}
+
+#map {
+	width: 100%;
+	height: 850px;
+}
+
+#scoreBoard {
+	position: absolute;
+	display: block;
+	z-index: 99999;
+	top: 0px;
+	padding: 0px 10px;
+}
+
+#MsgBoard {
+	position: absolute;
+	display: inline-block;
+	z-index: 99999;
+	top: 120px;
+	width: 100%;
+	text-align: center;
+}
+
+.successMsg {
+	color: green;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+.failMsg {
+	color: red;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+#radar {
+	width: 40px;
+	height: auto;
+}
+</style>
 <script src="https://code.jquery.com/jquery-1.10.0.js"></script>
 <script>
             $(document).ready(function() {
@@ -214,68 +264,28 @@
         	}
 
         </script>
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="utf-8">
-            <title>jindo-game</title>
-            <style>
-            	#container{
-            		width: 1800px;
-            		margin: 0px auto;
-            	}
-            	#map{
-            		width: 100%;
-            		height: 850px;
-            	}
-            	#scoreBoard{
-            		position: absolute;
-            		display: block;
-            		z-index:99999;
-            		top:0px;
-            		padding:0px 10px;
-            		}
-            	#MsgBoard{
-            		position: absolute;
-            		display: inline-block;
-            		z-index:99999;
-            		top:120px;
-            		width:100%;
-            		text-align:center;
-            	}
-            	.successMsg{
-            		color:green;
-            		font-weight: bold;
-            		font-size: 30px;
-            		
-            	}
-            	.failMsg{
-            		color:red;
-            		font-weight: bold;
-            		font-size: 30px;
-            	}
-            	#radar{
-            		width: 40px;
-    				height: auto;
-            	}
-            </style>
-        </head>
+</head>
 
-        <body>
-        	<div id="container">
-            <div id="map"></div>
-			<div id="scoreBoard"></div>
-			<div id="arrested"><strong>잡은간첩: </strong> </div>
-			<div id="subject"></div>
-			<div id="MsgBoard"><p class="successMsg"></p></div>
-			</div>
-			<form name="paging">
-				<input type="hidden" name="score"/>
-				<input type="hidden" name="spyJson">
-			</form>
-			
-            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=067a6bf449e7fc2d40b537d4fbbb485d&libraries=services"></script>
-            <script>
+<body>
+	<div id="container">
+		<div id="map"></div>
+		<div id="scoreBoard"></div>
+		<div id="arrested">
+			<strong>잡은간첩: </strong>
+		</div>
+		<div id="subject"></div>
+		<div id="MsgBoard">
+			<p class="successMsg"></p>
+		</div>
+	</div>
+	<form name="paging">
+		<input type="hidden" name="score" /> <input type="hidden"
+			name="spyJson">
+	</form>
+
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=067a6bf449e7fc2d40b537d4fbbb485d&libraries=services"></script>
+	<script>
                 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
                     mapOption = {
                         center: new daum.maps.LatLng(37.55878012, 126.99500883), // 지도의 중심좌표
@@ -283,6 +293,6 @@
                     };
 
             </script>
-        </body>
+</body>
 
-        </html>
+</html>
