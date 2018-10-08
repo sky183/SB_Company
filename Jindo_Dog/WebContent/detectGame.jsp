@@ -110,7 +110,7 @@
                 		if(score!=0&&score>=spyNum){ //남은간첩보다 점수가 높거나 같으면 승리
                 			win();
                 		}else{
-                			win();
+                			lose();
                 		}
                 	}
                 }
